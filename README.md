@@ -6,7 +6,9 @@ This extension allows debugging Lua code and using the Source engine console
 of Garry's Mod clients or SRCDS (SouRCe Dedicated Server) instances,
 through Visual Studio Code.
 
-This works by running a [remote debugging server](https://github.com/danielga/gm_rdb) on SRCDS listening on a port. The VSCode extension is then used to attach a debugging process to provide breakpoints.
+This works by running a [remote debugging server](https://github.com/danielga/gm_rdb)
+on SRCDS listening on a port. The VSCode extension is then used to attach a
+debugger to provide breakpoints.
 
 This fork works only with the Garry's Mod module
 [danielga/gm_rdb](https://github.com/danielga/gm_rdb).
@@ -35,20 +37,21 @@ Based on the work from
 
 ## Usage
 
-Be sure to use 64-bit or 32-bit modules on respective SRCDS platforms, otherwise modules will not be detected.
+Be sure to use 64-bit or 32-bit modules on the respective platforms, otherwise
+the modules will not be loaded.
 
-### Server-side Debugging
+### Server-side debugging
 
-For this example, we're using SRCDS from the beta `x86-64` branch on Windows.
+For this example, we're using SRCDS from the `x86-64` beta branch on Windows.
 
-The server will freeze *until* we attach a debugging process on VSCode and *resume*.
+The server will freeze *until* we attach the debugger through VSCode and *resume*.
 
-1. Place `gmsv_rdb_win64.dll` binary modules in `garrysmod/lua/bin` - [guide](https://wiki.facepunch.com/gmod/Creating_Binary_Modules)
-2. (Optional) Add the following snippet where ever we want to start the server
+1. Place the `gmsv_rdb_win64.dll` binary module in `garrysmod/lua/bin` - [guide](https://wiki.facepunch.com/gmod/Creating_Binary_Modules)
+2. (Optional) Add the following snippet wherever we want to start the server
 
 ```lua
 -- Fetch the remote debugging server binary module
-require('rdb')
+require("rdb")
 
 -- Start a debugging server
 -- This will pause the server until we attach a debugger
@@ -73,11 +76,12 @@ Feel free to use variables like `workspaceFolder` to specify paths as a shortcut
       "port": 21111,
       "name": "Attach to Garry's Mod",
       "sourceRoot": "C:/example-srcds/garrysmod",
-      // Important to map Lua source code to breakpoints (otherwise we'll see missing file errors on VSCode)
+      // Important to map Lua source code to breakpoints
+      // (otherwise we'll see missing file errors on VSCode)
       "sourceFileMap": {
         // Local absolute path: remote path
         "C:/example-srcds/garrysmod/addons/exampleaddon": "addons/exampleaddon",
-        "C:/example-srcds/garrysmod/gamemode/examplerp": "gamemodes/examplerp",
+        "C:/example-srcds/garrysmod/gamemode/examplerp": "gamemodes/examplerp"
       },
       "stopOnEntry": true
     },
@@ -86,11 +90,11 @@ Feel free to use variables like `workspaceFolder` to specify paths as a shortcut
       "request": "launch",
       "name": "Launch Garry's Mod",
       "program": "C:/example-srcds/srcds_win64.exe",
-      "cwd": "${workspaceFolder}",
+      "cwd": "C:/example-srcds",
       "args": [
         "-console",
         "-game", "garrysmod",
-        "-ip", "0.0.0.0",
+        "-ip", "127.0.0.1",
         "-port", "27015",
         "+map", "gm_construct",
         "+maxplayers", "2"
@@ -99,7 +103,7 @@ Feel free to use variables like `workspaceFolder` to specify paths as a shortcut
       "port": 21111,
       "sourceFileMap": {
         "C:/example-srcds/garrysmod/addons/test2": "addons/test2",
-        "C:/example-srcds/garrysmod/gamemode/examplerp": "gamemodes/examplerp",
+        "C:/example-srcds/garrysmod/gamemode/examplerp": "gamemodes/examplerp"
       },
       "stopOnEntry": true
     }
@@ -107,18 +111,24 @@ Feel free to use variables like `workspaceFolder` to specify paths as a shortcut
 }
 ```
 
-### Client-side Debugging
+### Client-side debugging
 
-This follows similar steps to server-side debugging on Windows 64-bit. However, we need to attach a debugging process to our actual Garry's Mod game on our local machine. No game launches from VSCode.
+This follows similar steps to server-side debugging on Windows 64-bit.
 
-When we install the `rdb` module in our local copy of Garry's Mod, it will allow the server to ask the client to start a debugging server. When we join a server with `rdb` setup, the game will freeze *until* we attach a debugging process on VSCode and *resume*.
+The client will freeze *until* we attach the debugger through VSCode and *resume*.
 
-1. Place `gmcl_rdb_win64.dll` binary modules in `garrysmod/lua/bin` in our local Garry's Mod installation - [guide](https://wiki.facepunch.com/gmod/Creating_Binary_Modules)
-2. (Optional) Add the following snippet in **both** client and server files where ever we want to start the debugging server
+It is possible to join a server that will load the module on your client.
+Just be wary if this is what you want, since ANY server can do this.
+The only effect of this should be your game freezing until you attach a debugger
+on it. Someone else remotely debugging your game should be considered a bug!
+
+1. Place the `gmcl_rdb_win64.dll` binary module in `garrysmod/lua/bin` in our
+local Garry's Mod installation - [guide](https://wiki.facepunch.com/gmod/Creating_Binary_Modules)
+1. (Optional) Add the following snippet wherever we want to start the debugging server
 
 ```lua
 -- Fetch the remote debugging server binary module
-require('rdb')
+require("rdb")
 
 -- Start a debugging server
 -- This will pause the server until we attach a debugger
@@ -143,11 +153,12 @@ Feel free to use variables like `workspaceFolder` to specify paths as a shortcut
       "port": 21111,
       "name": "Attach to Garry's Mod",
       "sourceRoot": "C:/steamapps/common/garrysmod",
-      // Important to map Lua source code to breakpoints (otherwise we'll see missing file errors on VSCode)
+      // Important to map Lua source code to breakpoints
+      // (otherwise we'll see missing file errors on VSCode)
       "sourceFileMap": {
         // Local absolute path: remote path
         "C:/steamapps/common/garrysmod/addons/exampleaddon": "addons/exampleaddon",
-        "C:/steamapps/common/garrysmod/gamemode/examplerp": "gamemodes/examplerp",
+        "C:/steamapps/common/garrysmod/gamemode/examplerp": "gamemodes/examplerp"
       },
       "stopOnEntry": true
     }
