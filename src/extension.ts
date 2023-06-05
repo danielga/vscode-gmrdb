@@ -41,10 +41,6 @@ export function activate(context: vscode.ExtensionContext): void {
     context.subscriptions.push(
       vscode.debug.registerDebugAdapterDescriptorFactory('gmrdb', factory)
     )
-
-    if ('dispose' in factory) {
-      context.subscriptions.push(factory)
-    }
   }
 }
 
