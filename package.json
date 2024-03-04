@@ -58,7 +58,7 @@
     "typescript": "^5.3.3",
     "@vscode/vsce": "^2.24.0",
     "@vscode/debugadapter-testsupport": "^1.64.0",
-    "@vscode/debugprotocol": "^1.63.0",
+    "@vscode/debugprotocol": "^1.65.0",
     "vscode-test": "^1.6.1"
   },
   "icon": "images/icon.png",
