@@ -57,7 +57,7 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.4.2",
     "@vscode/vsce": "^2.24.0",
-    "@vscode/debugadapter-testsupport": "^1.64.0",
+    "@vscode/debugadapter-testsupport": "^1.65.0",
     "@vscode/debugprotocol": "^1.65.0",
     "vscode-test": "^1.6.1"
   },
