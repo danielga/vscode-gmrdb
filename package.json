@@ -44,7 +44,7 @@
   "devDependencies": {
     "@types/jest": "^27.5.0",
     "@types/node": "^22.6.0",
-    "@types/vscode": "^1.92.0",
+    "@types/vscode": "^1.93.0",
     "@typescript-eslint/eslint-plugin": "^8.3.0",
     "@typescript-eslint/parser": "^8.7.0",
     "eslint": "^9.9.1",
