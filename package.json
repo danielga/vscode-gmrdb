@@ -55,7 +55,7 @@
     "prettier": "^3.6.2",
     "ts-jest": "^29.4.4",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.2",
+    "typescript": "^5.9.3",
     "@vscode/vsce": "^3.6.2",
     "@vscode/debugadapter-testsupport": "^1.68.0",
     "@vscode/debugprotocol": "^1.68.0",
